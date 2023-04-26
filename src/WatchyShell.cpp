@@ -1,8 +1,10 @@
 #include "WatchyShell.h"
 
-#define DARK_MODE true // Black background (true), white background (false)
+#define DARK_MODE true           // Black background (true), white background (false)
 #define TIME_DISPLAY_24_HR false // 24-hour time (true), 12-hour time with am/pm (false)
-#define NUM_BATT_SEGMENTS 19 // Number of '#' segments displayed at the bottom of the screen
+#define NUM_BATT_SEGMENTS 19     // Number of '#' segments displayed at the bottom of the screen
+#define MAX_BATT_V 4.1           // Approximate voltage of fully charged battery
+#define MIN_BATT_V 3.16          // Approximate voltage of fully discharged battery
 
 void WatchyShell::drawWatchFace() {
     display.fillScreen(DARK_MODE ? GxEPD_BLACK : GxEPD_WHITE);
@@ -61,10 +63,11 @@ void WatchyShell::drawDate() {
 }
 
 void WatchyShell::drawBattery() {
+    // Draw battery segments
     display.setFont(&FiraCode_Regular8pt7b);
     display.setCursor(4, 190);
     display.print("[");
-    float batteryPercentage = getBatteryVoltage() / 4.1;
+    float batteryPercentage = (getBatteryVoltage() - MIN_BATT_V) / (MAX_BATT_V - MIN_BATT_V);
     int8_t batteryLevel = (int8_t) (batteryPercentage * NUM_BATT_SEGMENTS);
     for (int8_t i = 0; i < batteryLevel; ++i) {
         display.print("#");
