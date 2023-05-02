@@ -3,7 +3,7 @@
 #define DARK_MODE true           // Black background (true), white background (false)
 #define TIME_DISPLAY_24_HR false // 24-hour time (true), 12-hour time with am/pm (false)
 #define NUM_BATT_SEGMENTS 19     // Number of '#' segments displayed at the bottom of the screen
-#define MAX_BATT_V 4.1           // Approximate voltage of fully charged battery
+#define MAX_BATT_V 4.2           // Approximate voltage of fully charged battery
 #define MIN_BATT_V 3.16          // Approximate voltage of fully discharged battery
 
 void WatchyShell::drawWatchFace() {
@@ -69,6 +69,7 @@ void WatchyShell::drawBattery() {
     display.print("[");
     float batteryPercentage = (getBatteryVoltage() - MIN_BATT_V) / (MAX_BATT_V - MIN_BATT_V);
     int8_t batteryLevel = (int8_t) (batteryPercentage * NUM_BATT_SEGMENTS);
+    batteryLevel = std::min(batteryLevel, (int8_t) NUM_BATT_SEGMENTS);
     for (int8_t i = 0; i < batteryLevel; ++i) {
         display.print("#");
     }
