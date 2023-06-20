@@ -19,9 +19,9 @@ void WatchyShell::drawTime() {
     display.setFont(&FiraCode_Regular8pt7b);
     display.setCursor(8, 20);
     if (TIME_DISPLAY_24_HR) {
-        display.println("~$ date +\"%H:%M %p\"");
+        display.println("~$ date +'%k:%M %p'");
     } else {
-        display.println("~$ date +\"%I:%M %p\"");
+        display.println("~$ date +'%l:%M %p'");
     }
     // Draw time
     display.setFont(&FiraCode_SemiBold28pt7b);
@@ -48,7 +48,7 @@ void WatchyShell::drawDate() {
     // Draw date prompt
     display.setFont(&FiraCode_Light8pt7b);
     display.setCursor(8, 110);
-    display.println("~$ date +\"%a, %b %d\"");
+    display.println("~$ date +'%a, %b %d'");
     // Draw date
     display.setFont(&FiraCode_Regular14pt7b);
     display.setCursor(8, 150);
