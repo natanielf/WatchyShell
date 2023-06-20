@@ -4,7 +4,7 @@
 #define TIME_DISPLAY_24_HR false // 24-hour time (true), 12-hour time with am/pm (false)
 #define NUM_BATT_SEGMENTS 19     // Number of '#' segments displayed at the bottom of the screen
 #define MAX_BATT_V 4.2           // Approximate voltage of fully charged battery
-#define MIN_BATT_V 3.16          // Approximate voltage of fully discharged battery
+#define MIN_BATT_V 3.2           // Approximate voltage of fully discharged battery
 
 void WatchyShell::drawWatchFace() {
     display.fillScreen(DARK_MODE ? GxEPD_BLACK : GxEPD_WHITE);
